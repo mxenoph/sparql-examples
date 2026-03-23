@@ -7,8 +7,12 @@ ex:001 a sh:SPARQLExecutable,
         sh:SPARQLSelectExecutable ;
     rdfs:comment "What hospitals have a heliport?"@en ;
     sh:prefixes _:sparql_examples_prefixes ;
-    sh:select """PREFIX up: <http://purl.uniprot.org/core/>
+    sh:select """
 
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 SELECT DISTINCT ?item ?itemLabel ?geo WHERE {
   # 1. The item must be an instance or subclass of a hospital
   ?item wdt:P31/wdt:P279* wd:Q16917.
