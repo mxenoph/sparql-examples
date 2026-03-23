@@ -1,0 +1,29 @@
+@prefix ex: <https://www.bgee.org/sparql/.well-known/sparql-examples/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+ex:001 a sh:SPARQLExecutable,
+        sh:SPARQLSelectExecutable ;
+    rdfs:comment "What hospitals have a heliport?"@en ;
+    sh:prefixes _:sparql_examples_prefixes ;
+    sh:select """PREFIX up: <http://purl.uniprot.org/core/>
+
+SELECT DISTINCT ?item ?itemLabel ?geo WHERE {
+  # 1. The item must be an instance or subclass of a hospital
+  ?item wdt:P31/wdt:P279* wd:Q16917.
+  
+  # 2. The item must also have a property indicating it is/has a heliport
+  # Using P31 (instance of) or P466 (occupant) depending on how it's tagged
+  ?item wdt:P31/wdt:P279* wd:Q502074.
+  
+  # 3. Get the coordinates
+  ?item wdt:P625 ?geo.
+  
+  # 4. Standard Wikidata service to get human-readable labels
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+}""" ;
+    schema:target <https://sparql.uniprot.org/sparql/>,
+        <https://www.bgee.org/sparql/>, <https://sparql.omabrowser.org/sparql/> .
+
