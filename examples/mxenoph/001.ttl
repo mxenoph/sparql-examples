@@ -22,7 +22,6 @@ SELECT DISTINCT ?item ?itemLabel ?geo WHERE {
   
   # 4. Standard Wikidata service to get human-readable labels
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-}
 }""" ;
     schema:target <https://sparql.uniprot.org/sparql/>,
         <https://www.bgee.org/sparql/>, <https://sparql.omabrowser.org/sparql/> .
